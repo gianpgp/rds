@@ -1,13 +1,13 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Back4App Tutorial
+      Prime Reserva de Salas
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h4 text-center margin-top>Insert your credentials</h4>
+  <h4 text-center margin-top>Login</h4>
 
   <ion-item>
     <ion-label stacked>Username</ion-label>
@@ -19,13 +19,10 @@
     <ion-input type="password" [(ngModel)]="password"></ion-input>
   </ion-item>
 
-  <div text-center margin-top>
-    <button ion-button margin-right (click)="signUp()">
-      SIGN UP
-    </button>
+
 
     <button ion-button color="secondary" (click)="signIn()">
-      SIGN IN
+      Sign in
     </button>
-  </div>
+ 
 </ion-content>

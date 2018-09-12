@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+import { ReservaPageModule } from '../pages/reserva/reserva.module';
+import { ConsultaPageModule } from '../pages/consulta/consulta.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,9 @@ import { MyApp } from './app.component';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ReservaPageModule,
+    ConsultaPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

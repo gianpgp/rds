@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import Parse from 'parse';
+import { ReservaPage } from '../reserva/reserva';
+import { ConsultaPage } from '../consulta/consulta';
 
 @IonicPage()
 @Component({
@@ -16,6 +18,16 @@ export class HomePage {
   ) {
 
   }
+
+  goToReserva(){
+    this.navCtrl.push(ReservaPage);
+  }
+
+  goToConsulta(){
+    this.navCtrl.push(ConsultaPage);
+  }
+
+
 
   logOut() {
     Parse.User.logOut().then((resp) => {
