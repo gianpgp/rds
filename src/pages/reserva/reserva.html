@@ -19,16 +19,16 @@
     
     <ion-item>
       <ion-label fixed>Data</ion-label>
-      <ion-input type="date" value=""></ion-input>
+      <ion-input type="date" value="" [(ngModel)]="data"></ion-input>
     </ion-item>
   
     <ion-item>
       <ion-label fixed>Hora</ion-label>
-      <ion-input type="time"></ion-input>
-      <ion-input type="time"></ion-input>
+      <ion-input type="time" [(ngModel)]="init" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"></ion-input>
+      <ion-input type="time" [(ngModel)]="end"></ion-input>
     </ion-item>
 
   
   </ion-list>
-  <button ion-button>Pesquisar Salas</button>
+  <button ion-button (click)="buscar_agendamento()">Pesquisar Salas</button>
 </ion-content>
