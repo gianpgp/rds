@@ -20,14 +20,14 @@ export class ConsultaPage {
 
   sucesso(results, conteudo) {
     for (var i in results) {
-
+      var us = results[i].get("User");
       conteudo.push(
         {
           Sala: results[i].get("Sala"),
           Inicio: results[i].get("Inicio"),
           Fim: results[i].get("Fim"),
           Desc: results[i].get("Descricao"),
-          // User:results[i].user.get("Nome")
+          User:us.get("Nome")
 
         }
       )
@@ -41,7 +41,7 @@ export class ConsultaPage {
      
       var cat = this;
       var query = new Parse.Query(this.ag);
-      // query.include("User");
+      var user = query.include("User");
       //query.equalTo("Disponivel",true);
       query.find({
 
