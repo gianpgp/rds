@@ -43,7 +43,8 @@ export class ConsultaPage {
      
       var cat = this;
       var query = new Parse.Query(this.ag);
-      var user = query.include("User");
+      query.ascending("Sala");
+      query.include("User");
       //query.equalTo("Disponivel",true);
       query.find({
 
