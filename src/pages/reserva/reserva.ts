@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Time } from '@angular/common';
 import Parse from 'parse';
+import { AlertController } from 'ionic-angular';
 //import Parse from 'parse';
 
 /**
@@ -24,7 +25,7 @@ export class ReservaPage {
     desc:string;
     Agendamento = Parse.Object.extend("Agendamentos");
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     }
 
     ionViewDidLoad() {
@@ -42,7 +43,7 @@ export class ReservaPage {
         ag.set("User", Parse.User.current());
         ag.save(null, {
             success: function (ag) {
-                alert("Agendado!")
+                console.log("Agendado!");
 
             },
             error: function (response, error) {
@@ -91,7 +92,8 @@ export class ReservaPage {
 
         //mostra salas desocupadas
         if (salasOcupadas.length == 4) {
-            alert("Nenhuma sala disponível.")
+            // alert("Nenhuma sala disponível.")
+            this.showAlert("Nenhuma sala disponível.","Tente com outro horário.")
         } else {
             for (let i = 1; i < 5; i++) {
                 if ((salasOcupadas.indexOf(i) == -1)) {
@@ -103,8 +105,8 @@ export class ReservaPage {
                         let data_2 = new Date(horaFim);
                         
                         this.createAgendamento(i, data_1, data_2,desc);
-                        
-                        alert("Sala " + i + " agendada.");
+                        this.showAlert("Sala reservada!", "Sala " + i + " agendada.")
+                        // alert("Sala " + i + " agendada.");
                         break;
                     }
 
@@ -134,13 +136,15 @@ export class ReservaPage {
     buscar_agendamento() {
         
         if (this.data == null || this.init == null || this.end == null || this.desc ==null) {
-            alert("Falha: Prencha todos os dados de busca e tente de novo.");
+            // alert("Falha: Prencha todos os dados de busca e tente de novo.");
+            this.showAlert("Falha:","Prencha todos os dados de busca e tente de novo.");
             return;
         } else {
             var data1 = new Date(this.data + " " + this.init).getTime();
             var data2 = new Date(this.data + " " + this.end).getTime();
             if (data1 > data2) {
-                alert("Falha: Data de inicio maior que a de fim, tente novamente.");
+                // alert("Falha: Data de inicio maior que a de fim, tente novamente.");
+                this.showAlert("Falha:","Data de inicio maior que a de fim, tente novamente.");
                 return;
 
             } else {
@@ -153,4 +157,13 @@ export class ReservaPage {
 
 
     }
+
+    showAlert(titulo,conteudo) {
+        const alert = this.alertCtrl.create({
+          title: titulo,
+          subTitle: conteudo,
+          buttons: ['OK']
+        });
+        alert.present();
+      }
 }
