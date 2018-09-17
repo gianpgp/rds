@@ -17,14 +17,15 @@
   <ion-card *ngFor="let objeto_feed of conteudo">
 
     <ion-card-header>
-      {{objeto_feed.Sala}}
+     Sala {{objeto_feed.Sala}}
     </ion-card-header>
   
     <ion-card-content>
-      {{objeto_feed.Inicio}} <br>
-      {{objeto_feed.Fim}} <br>
-      {{objeto_feed.Desc}} <br>
-      {{objeto_feed.User}}
+      Inicio: {{objeto_feed.Inicio}} <br>
+      Fim: {{objeto_feed.Fim}} <br>
+      Descrição: {{objeto_feed.Desc}} <br>
+      Nome: {{objeto_feed.User}} <br>
+      Ramal:{{objeto_feed.Ramal}} <br>
     </ion-card-content>
   
   </ion-card>

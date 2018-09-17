@@ -21,7 +21,7 @@ export class ReservaPage {
     data: Date;
     init: Time;
     end: Time;
-
+    desc:string;
     Agendamento = Parse.Object.extend("Agendamentos");
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -31,14 +31,14 @@ export class ReservaPage {
         console.log('ionViewDidLoad ReservaPage');
     }
 
-    createAgendamento(sala, data1, data2) {
+    createAgendamento(sala, data1, data2, desc) {
 
         let ag = new this.Agendamento();
 
         ag.set("Sala", sala);
         ag.set("Inicio", data1);
         ag.set("Fim", data2);
-        ag.set("Descricao", "Reservada");
+        ag.set("Descricao", desc);
         ag.set("User", Parse.User.current());
         ag.save(null, {
             success: function (ag) {
@@ -55,7 +55,7 @@ export class ReservaPage {
         console.log(1);
     }
 
-    sucesso (results, horaInicio, horaFim) {
+    sucesso (results, horaInicio, horaFim, desc) {
 
         var query = new Parse.Query(this.Agendamento);
         var salasOcupadas = [];
@@ -102,7 +102,7 @@ export class ReservaPage {
                         let data_1 = new Date(horaInicio);
                         let data_2 = new Date(horaFim);
                         
-                        this.createAgendamento(i, data_1, data_2);
+                        this.createAgendamento(i, data_1, data_2,desc);
                         
                         alert("Sala " + i + " agendada.");
                         break;
@@ -118,10 +118,10 @@ export class ReservaPage {
     getSalas(horaInicio, horaFim) {
         var query = new Parse.Query(this.Agendamento);
         var outside = this;
-
+       
         query.find({
             success: function(result) {
-                return outside.sucesso(result, horaInicio, horaFim);
+                return outside.sucesso(result, horaInicio, horaFim, outside.desc);
             }
             , error: function (error) {
                 console.log(error.mesage);
@@ -132,8 +132,8 @@ export class ReservaPage {
     }
 
     buscar_agendamento() {
-
-        if (this.data == null || this.init == null || this.end == null) {
+        
+        if (this.data == null || this.init == null || this.end == null || this.desc ==null) {
             alert("Falha: Prencha todos os dados de busca e tente de novo.");
             return;
         } else {

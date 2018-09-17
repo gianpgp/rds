@@ -27,7 +27,9 @@ export class ConsultaPage {
           Inicio: results[i].get("Inicio"),
           Fim: results[i].get("Fim"),
           Desc: results[i].get("Descricao"),
+          Ramal:us.get("ramal"),
           User:us.get("Nome")
+          
 
         }
       )
