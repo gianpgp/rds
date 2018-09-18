@@ -22,14 +22,17 @@ export class ReservaPage {
     data: Date;
     init: Time;
     end: Time;
-    desc:string;
+    desc: string;
     Agendamento = Parse.Object.extend("Agendamentos");
+    testRadioOpen: boolean;
+    testRadioResult: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ReservaPage');
+        // this.showRadio();
     }
 
     createAgendamento(sala, data1, data2, desc) {
@@ -56,7 +59,7 @@ export class ReservaPage {
         console.log(1);
     }
 
-    sucesso (results, horaInicio, horaFim, desc) {
+    sucesso(results, horaInicio, horaFim, desc) {
 
         var query = new Parse.Query(this.Agendamento);
         var salasOcupadas = [];
@@ -93,26 +96,33 @@ export class ReservaPage {
         //mostra salas desocupadas
         if (salasOcupadas.length == 4) {
             // alert("Nenhuma sala disponível.")
-            this.showAlert("Nenhuma sala disponível.","Tente com outro horário.")
+            this.showAlert("Nenhuma sala disponível.", "Tente com outro horário.")
         } else {
+            let sala_disp = [];
             for (let i = 1; i < 5; i++) {
+
                 if ((salasOcupadas.indexOf(i) == -1)) {
-                    let r = confirm("Sala " + i + " disponivel, reservar sala?");
+                    sala_disp.push({
+                        Sala: "Sala " + i,
+                        valor: i
+                    })
+                    // let r = confirm("Sala " + i + " disponivel, reservar sala?");
 
-                    if (r == true) {
+                    // if (r == true) {
 
-                        let data_1 = new Date(horaInicio);
-                        let data_2 = new Date(horaFim);
-                        
-                        this.createAgendamento(i, data_1, data_2,desc);
-                        this.showAlert("Sala reservada!", "Sala " + i + " agendada.")
-                        // alert("Sala " + i + " agendada.");
-                        break;
-                    }
+                    //     let data_1 = new Date(horaInicio);
+                    //     let data_2 = new Date(horaFim);
+                    //     this.showRadio()
+                    //     this.createAgendamento(i, data_1, data_2,desc);
+                    //     this.showAlert("Sala reservada!", "Sala " + i + " agendada.")
+                    //     // alert("Sala " + i + " agendada.");
+                    //     break;
+                    // }
 
 
                 }
             }
+            this.showRadio(sala_disp, horaInicio, horaFim, desc);
         }
 
     }
@@ -120,9 +130,9 @@ export class ReservaPage {
     getSalas(horaInicio, horaFim) {
         var query = new Parse.Query(this.Agendamento);
         var outside = this;
-       
+
         query.find({
-            success: function(result) {
+            success: function (result) {
                 return outside.sucesso(result, horaInicio, horaFim, outside.desc);
             }
             , error: function (error) {
@@ -134,21 +144,21 @@ export class ReservaPage {
     }
 
     buscar_agendamento() {
-        
-        if (this.data == null || this.init == null || this.end == null || this.desc ==null) {
+
+        if (this.data == null || this.init == null || this.end == null || this.desc == null) {
             // alert("Falha: Prencha todos os dados de busca e tente de novo.");
-            this.showAlert("Falha:","Prencha todos os dados de busca e tente de novo.");
+            this.showAlert("Falha:", "Prencha todos os dados de busca e tente de novo.");
             return;
         } else {
             var data1 = new Date(this.data + " " + this.init).getTime();
             var data2 = new Date(this.data + " " + this.end).getTime();
             if (data1 > data2) {
                 // alert("Falha: Data de inicio maior que a de fim, tente novamente.");
-                this.showAlert("Falha:","Data de inicio maior que a de fim, tente novamente.");
+                this.showAlert("Falha:", "Data de inicio maior que a de fim, tente novamente.");
                 return;
 
             } else {
-            
+
                 this.getSalas(data1, data2);
             }
 
@@ -158,12 +168,54 @@ export class ReservaPage {
 
     }
 
-    showAlert(titulo,conteudo) {
+    showAlert(titulo, conteudo) {
         const alert = this.alertCtrl.create({
-          title: titulo,
-          subTitle: conteudo,
-          buttons: ['OK']
+            title: titulo,
+            subTitle: conteudo,
+            buttons: ['OK']
         });
         alert.present();
-      }
+    }
+
+
+    showRadio(sala_disp, x, y, desc) {
+        let alert = this.alertCtrl.create();
+        alert.setTitle('Salas Disponíveis');
+
+
+        function alert_sala(b, c) {
+
+            alert.addInput({
+                type: 'radio',
+                label: b,
+                value: c,
+                checked: false
+            });
+
+        }
+
+        for (let sala of sala_disp) {
+            alert_sala(sala.Sala, sala.valor)
+        }
+        // alert_sala("Sala 1",1);
+
+        alert.addButton('Cancelar');
+        alert.addButton({
+            text: 'Reservar',
+            handler: data => {
+                this.testRadioOpen = false;
+                this.testRadioResult = data;
+                console.log(this.testRadioResult);
+                let data_1 = new Date(x);
+                let data_2 = new Date(y);
+
+                this.createAgendamento(this.testRadioResult, data_1, data_2, desc);
+                this.showAlert("Sala reservada!", "Sala " + this.testRadioResult + " agendada.")
+
+
+
+            }
+        });
+        alert.present();
+    }
 }
