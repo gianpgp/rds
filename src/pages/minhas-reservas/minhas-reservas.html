@@ -1,5 +1,5 @@
 <!--
-  Generated template for the ConsultaPage page.
+  Generated template for the MinhasReservasPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Consulta</ion-title>
+    <ion-title>Minhas Reservas</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -27,6 +27,8 @@
       Nome: {{objeto_feed.User}} <br>
       Ramal:{{objeto_feed.Ramal}} <br>
     </ion-card-content>
+
+    <button ion-button small color="danger" (click)=" showConfirm(objeto_feed.id)">Cancelar</button>
   
   </ion-card>
 </ion-content>

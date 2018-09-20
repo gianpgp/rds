@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { ReservaPageModule } from '../pages/reserva/reserva.module';
 import { ConsultaPageModule } from '../pages/consulta/consulta.module';
+import { MinhasReservasPageModule } from '../pages/minhas-reservas/minhas-reservas.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { ConsultaPageModule } from '../pages/consulta/consulta.module';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     ReservaPageModule,
-    ConsultaPageModule
+    ConsultaPageModule,
+    MinhasReservasPageModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

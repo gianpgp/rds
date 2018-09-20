@@ -45,7 +45,11 @@ export class ConsultaPage {
       var query = new Parse.Query(this.ag);
       query.ascending("Sala");
       query.include("User");
-      //query.equalTo("Disponivel",true);
+      
+      // mostrar as reservas do usuario 
+      // let logado = Parse.User.current();
+      // query.equalTo("User", logado);
+      
       query.find({
 
         success: function (results) {

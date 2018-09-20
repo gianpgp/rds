@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angula
 import Parse from 'parse';
 import { ReservaPage } from '../reserva/reserva';
 import { ConsultaPage } from '../consulta/consulta';
+import { MinhasReservasPage } from '../minhas-reservas/minhas-reservas';
 
 @IonicPage()
 @Component({
@@ -26,6 +27,12 @@ export class HomePage {
   goToConsulta(){
     this.navCtrl.push(ConsultaPage);
   }
+
+  goToMinhasReservas(){
+    this.navCtrl.push(MinhasReservasPage);
+  }
+
+  
 
 
 
