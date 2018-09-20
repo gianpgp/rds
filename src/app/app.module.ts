@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { ReservaPageModule } from '../pages/reserva/reserva.module';
 import { ConsultaPageModule } from '../pages/consulta/consulta.module';
 import { MinhasReservasPageModule } from '../pages/minhas-reservas/minhas-reservas.module';
+import { ConsultarSalasPageModule } from '../pages/consultar-salas/consultar-salas.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MinhasReservasPageModule } from '../pages/minhas-reservas/minhas-reserv
     IonicModule.forRoot(MyApp),
     ReservaPageModule,
     ConsultaPageModule,
-    MinhasReservasPageModule
+    MinhasReservasPageModule,
+    ConsultarSalasPageModule
     
   ],
   bootstrap: [IonicApp],

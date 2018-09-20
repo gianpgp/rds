@@ -4,6 +4,7 @@ import Parse from 'parse';
 import { ReservaPage } from '../reserva/reserva';
 import { ConsultaPage } from '../consulta/consulta';
 import { MinhasReservasPage } from '../minhas-reservas/minhas-reservas';
+import { ConsultarSalasPage } from '../consultar-salas/consultar-salas';
 
 @IonicPage()
 @Component({
@@ -25,7 +26,7 @@ export class HomePage {
   }
 
   goToConsulta(){
-    this.navCtrl.push(ConsultaPage);
+    this.navCtrl.push(ConsultarSalasPage);
   }
 
   goToMinhasReservas(){
