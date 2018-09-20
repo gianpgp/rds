@@ -39,7 +39,7 @@ export class Sala_2Page {
 
     
     getSalas(){
-     
+      this.conteudo = [];
       var cat = this;
       var query = new Parse.Query(this.ag);
       query.ascending("Sala");
@@ -62,7 +62,15 @@ export class Sala_2Page {
       });
     }
 
-    
+    doRefresh(refresher) {
+      console.log('Begin async operation', refresher);
+  
+      setTimeout(() => {
+        console.log('Async operation has ended');
+        this.getSalas();
+        refresher.complete();
+      }, 800);
+    }
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
