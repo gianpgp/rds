@@ -21,11 +21,11 @@
     </ion-card-header>
   
     <ion-card-content>
-      Inicio: {{objeto_feed.Inicio}} <br>
-      Fim: {{objeto_feed.Fim}} <br>
+      Data: {{objeto_feed.Data}} <br>
+      Horário: {{objeto_feed.Inicio}} --<s></s> {{objeto_feed.Fim}} <br>
       Descrição: {{objeto_feed.Desc}} <br>
       Nome: {{objeto_feed.User}} <br>
-      Ramal:{{objeto_feed.Ramal}} <br>
+      Ramal: {{objeto_feed.Ramal}} <br>
     </ion-card-content>
 
     <button ion-button small color="danger" (click)=" showConfirm(objeto_feed.id)">Cancelar</button>
