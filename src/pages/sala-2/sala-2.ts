@@ -23,8 +23,9 @@ export class Sala_2Page {
       conteudo.push(
         {
           Sala: results[i].get("Sala"),
-          Inicio: results[i].get("Inicio"),
-          Fim: results[i].get("Fim"),
+          Data:  this.converterData(results[i].get("Inicio")),
+          Inicio: this.converterHora(results[i].get("Inicio")),
+          Fim: this.converterHora(results[i].get("Fim")),
           Desc: results[i].get("Descricao"),
           Ramal:us.get("ramal"),
           User:us.get("Nome")
@@ -80,4 +81,18 @@ export class Sala_2Page {
     this.getSalas();
   }
 
+  converterData(data){
+    return data.getDate() +"/"+ data.getMonth()  +"/"+ data.getFullYear();
+  }
+
+  converterHora(data){
+    let hora = data.getHours();
+    let minuto = data.getMinutes();
+
+    if (hora<10 && minuto<10 ){return "0"+data.getHours() +":"+ "0"+data.getMinutes();}
+    if (hora<10){return "0"+data.getHours() +":"+ data.getMinutes();}
+    if (minuto<10){return data.getHours() +":"+ "0"+data.getMinutes();}
+    
+    return data.getHours() +":"+ data.getMinutes();
+  }
 }

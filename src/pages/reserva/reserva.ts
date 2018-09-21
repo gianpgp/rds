@@ -18,7 +18,8 @@ import { AlertController } from 'ionic-angular';
     templateUrl: 'reserva.html',
 })
 export class ReservaPage {
-
+       
+    
     data: Date;
     init: Time;
     end: Time;
@@ -33,6 +34,7 @@ export class ReservaPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad ReservaPage');
         // this.showRadio();
+        
     }
 
     createAgendamento(sala, data1, data2, desc) {
@@ -71,8 +73,8 @@ export class ReservaPage {
             for (let result of results) {
 
                 var sala = result.get("Sala");
-                var inicio = result.get("Inicio").getTime();
-                var fim = result.get("Fim").getTime();
+                var inicio = result.get("Inicio").getTime()+1;
+                var fim = result.get("Fim").getTime()-1;
 
                 //verifica horario ocupado
                 if ((inicio <= horaInicio && horaInicio <= fim) || (inicio <= horaFim && horaFim <= fim) || (inicio >= horaInicio && horaFim >= fim)) {
@@ -152,9 +154,9 @@ export class ReservaPage {
         } else {
             var data1 = new Date(this.data + " " + this.init).getTime();
             var data2 = new Date(this.data + " " + this.end).getTime();
-            if (data1 > data2) {
+            if (data1 >= data2) {
                 // alert("Falha: Data de inicio maior que a de fim, tente novamente.");
-                this.showAlert("Falha:", "Data de inicio maior que a de fim, tente novamente.");
+                this.showAlert("Falha:", "Data de inicio maior ou igual que a de fim, tente novamente.");
                 return;
 
             } else {
